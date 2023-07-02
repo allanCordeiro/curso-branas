@@ -1,50 +1,38 @@
 // @ts-nocheck
-export function validate (str) {
-    if(!isFullFilled(str)) {
+export function validate (cpf: string) : boolean {
+    if(!isFullFilled(cpf)) {        
         return false;
     }
-    str = sanitize(str);
-    if(!isRightLength(str.length)) {
+    cpf = sanitize(cpf);
+    if(!isProperLength(cpf.length)) {        
+        return false;
+    }    
+    if (!hasRepeatedNumbers) {        
         return false;
     }
-    
-    if (!hasRepeatedNumbers) {
-        return false;
-    }
-
     try{  
-        let     d1, d2;  
-        let     dg1, dg2, rest;  
-        let     digito;  
-            let     nDigResult;  
-        d1 = d2 = 0;  
-        dg1 = dg2 = rest = 0;  
-            
-        for (let nCount = 1; nCount < str.length -1; nCount++) {  
-            digito = parseInt(str.substring(nCount -1, nCount));  							
-            d1 = d1 + ( 11 - nCount ) * digito;  
-
-            d2 = d2 + ( 12 - nCount ) * digito;                  
-        };  
-            
-        rest = (d1 % 11);  
-
-        dg1 = (rest < 2) ? dg1 = 0 : 11 - rest;  
-        d2 += 2 * dg1;  
-        rest = (d2 % 11);  
-        if (rest < 2)  
-            dg2 = 0;  
-        else  
-            dg2 = 11 - rest;  
-
-            let nDigVerific = str.substring(str.length-2, str.length);  
-        nDigResult = "" + dg1 + "" + dg2;  
-        return nDigVerific == nDigResult;
-    }catch (e){  
+        let digitBlock1 = 0, digitBlock2 = 0;                
+        let checkDigit1 = 0, checkDigit2 = 0, rest = 0;          
+        let verifiedDigitCheck;   
+        digitBlock1 = getSumBlock(11, cpf);    
+        digitBlock2 = getSumBlock(12, cpf);                        
+        rest = (digitBlock1 % 11);          
+        checkDigit1 = getRealCheckDigit(rest);        
+        digitBlock2 += 2 * checkDigit1;          
+        rest = (digitBlock2 % 11);          
+        checkDigit2 = getRealCheckDigit(rest);        
+        verifiedDigitCheck =  "" + checkDigit1 + checkDigit2; 
+        return compareCheckDigits(verifiedDigitCheck, cpf);
+        
+    } catch (e) {  
         console.error("Erro !"+e);  
-
         return false;  
     }         
+}
+
+function compareCheckDigits(checkDigit: string, cpf: string) : boolean {
+    let currentDigitCheck = cpf.substring(cpf.length-2, cpf.length);      
+    return currentDigitCheck === checkDigit;
 }
 
 function isFullFilled(cpf: string): boolean {
@@ -54,7 +42,7 @@ function isFullFilled(cpf: string): boolean {
     return false;
 }
 
-function isRightLength(len: number): boolean {
+function isProperLength(len: number): boolean {
     if(len === 11) {
         return true;        
     }
@@ -68,3 +56,17 @@ function sanitize(cpf: string): string {
 function hasRepeatedNumbers(cpf: string): boolean {
     return cpf.split("").every((c) => c === cpf[0])
 }
+
+function getRealCheckDigit(mod: number): number {
+    return (mod < 2) ? 0 : 11 - mod;  
+}
+
+function getSumBlock(digit: number, cpf: string): number {
+    let blockNumber = 0, parsedDigit = 0;    
+    for (let nCount = 1; nCount < cpf.length -1; nCount++) {  
+        parsedDigit = parseInt(cpf.substring(nCount -1, nCount));  							
+        blockNumber += (digit - nCount) * parsedDigit;                  
+    };  
+    return blockNumber;
+}
+

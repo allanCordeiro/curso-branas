@@ -1,4 +1,4 @@
-import { validate } from "./cpf";
+import { validate } from "../src/cpf";
 
 test("deve enviar true para um cpf valido", function() {
     const cpf = "861.419.820-50";
@@ -7,7 +7,7 @@ test("deve enviar true para um cpf valido", function() {
 });
 
 test("deve enviar true para um cpf valido porem sem mascara", function() {
-    const cpf = "86141982050";
+    const cpf = "32883168890";
     const isCpfValid = validate(cpf);
     expect(isCpfValid).toBeTruthy();
 });
@@ -32,6 +32,12 @@ test("deve enviar false para um cpf com mais de 14 caracteres", function() {
 
 test("deve enviar false para um cpf com numeros repetidos", function(){
     const cpf = "111111111111";
+    const isCpfValid = validate(cpf);
+    expect(isCpfValid).toBeFalsy(); 
+});
+
+test("deve enviar um erro pois é um dado não esperado", function(){
+    const cpf = "este será um erro";
     const isCpfValid = validate(cpf);
     expect(isCpfValid).toBeFalsy(); 
 });
