@@ -7,7 +7,7 @@ test("deve enviar true para um cpf valido", function() {
 });
 
 test("deve enviar true para um cpf valido porem sem mascara", function() {
-    const cpf = "32883168890";
+    const cpf = "86141982050";
     const isCpfValid = validate(cpf);
     expect(isCpfValid).toBeTruthy();
 });
