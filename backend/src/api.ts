@@ -1,7 +1,6 @@
-// @ts-nocheck
 import express from "express";
-import { calculate } from "./ride.calculator";
-import Ride from "./ride";
+import { calculate } from "./ride/ride.calculator";
+import Ride from "./ride/ride";
 const app = express();
 
 app.use(express.json());
@@ -14,7 +13,7 @@ app.post("/calculate_ride", function (req, res) {
 		}
 		const price = ride.calculate();
 		res.json({ price });
-	} catch (e) {
+	} catch (e: any) {
 		res.status(422).send(e.message);
 	}
 });

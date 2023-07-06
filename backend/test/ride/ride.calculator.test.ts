@@ -1,5 +1,5 @@
 
-import { calculate } from "../src/ride.calculator";
+import { calculate } from "../../src/ride/ride.calculator";
 
 test("Deve fazer o cálculo do preço de uma corrida durante o dia", function () {
 	const segments = [

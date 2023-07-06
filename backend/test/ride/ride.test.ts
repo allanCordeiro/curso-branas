@@ -1,6 +1,6 @@
 
-import Ride from "../src/ride";
-import { calculate } from "../src/ride.calculator";
+import Ride from "../../src/ride/ride";
+import { calculate } from "../../src/ride/ride.calculator";
 
 test("Deve fazer o cálculo do preço de uma corrida durante o dia", function () {
 	const ride = new Ride();
