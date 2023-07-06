@@ -1,4 +1,4 @@
-import  CpfValidator  from "../src/cpf.validator";
+import Cpf from "../src/cpf.validator";
 
 
 test.each([
@@ -7,7 +7,7 @@ test.each([
     "17422998067",
     "67854852405"
 ])("Deve testar os cpfs validos", function(value:string) {
-    const cpf = new CpfValidator(value);
+    const cpf = new Cpf(value);
     expect(cpf.value).toBe(value);
 });
 
@@ -18,7 +18,7 @@ test.each([
     "99999999999",
     "",    
 ])("Deve testar os cpfs nao validos", function(value: string){    
-    expect(() => new CpfValidator(value)).toThrow(new Error("invalid cpf"));    
+    expect(() => new Cpf(value)).toThrow(new Error("invalid cpf"));    
 });
 
 

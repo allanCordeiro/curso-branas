@@ -1,4 +1,4 @@
-export default class CpfValidator {
+export default class Cpf {
     value: string;
     constructor(value: string) {
         this.value = value;
@@ -17,7 +17,7 @@ export default class CpfValidator {
     }
 
     private compareCheckDigits(checkDigit: string) : boolean {
-        let currentDigitCheck = this.value.substring(this.value.length-2, this.value.length);      
+        let currentDigitCheck = this.value.slice(9);      
         return currentDigitCheck === checkDigit;
     }
     
