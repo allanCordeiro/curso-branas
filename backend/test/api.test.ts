@@ -7,18 +7,18 @@ axios.defaults.validateStatus = function () {
 test("Deve fazer o cálculo do preço de uma corrida durante o dia", async function () {
 	const input = {
 		segments: [
-			{ distance: 10, date: "2021-03-01T10:00:00" }
+			{ from:  [-23.5850, -46.6060], to: [-23.5346, -46.6523], date: "2021-03-01T10:00:00" }
 		]
 	};
 	const response = await axios.post("http://localhost:3000/calculate_ride", input);
 	const output = response.data;
-	expect(output.price).toBe(21);
+	expect(output.price).toBe(15.39);
 });
 
 test("Se a distância for inválida deve lançar um erro", async function () {
 	const input = {
 		segments: [
-			{ distance: -10, date: "2021-03-01T10:00:00" }
+			{ from:  [-1.00, -1.00], to: [-1.00, -1.00], date: "2021-03-01T10:00:00" }
 		]
 	};
 	const response = await axios.post("http://localhost:3000/calculate_ride", input);

@@ -12,8 +12,8 @@ export default class Ride {
 		this.segments = [];
 	}
 
-	addSegment (distance: number, date: Date) {
-		this.segments.push(new Segment(distance, date));
+	addSegment (latPointA: number, longPointA: number, latPointB: number, longPointB: number, date: Date) {
+		this.segments.push(new Segment(latPointA, longPointA, latPointB, longPointB, date));
 	}
 
 	calculate () {
@@ -32,6 +32,9 @@ export default class Ride {
 				price += segment.distance * this.NORMAL_FARE;
 			}
 		}
+		const factor = 10 ** 2;
+		price = Math.round(price * factor) / factor;
+		
 		return (price < this.MIN_PRICE) ? this.MIN_PRICE : price;
 	}
 }
