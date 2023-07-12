@@ -111,3 +111,64 @@ test("Deve obter o motorista", async function () {
 	expect(output.document).toBe("86141982050");
 	expect(output.carPlate).toBe("AAA9999");
 });
+
+test("Deve criar uma ride", async function () {
+	const input = {
+		"passenger_id": "f1ca63bb-1301-4966-bb94-ddd43fca7e72",
+		"from": [-23.5850, -46.6060],
+		"to": [-23.5346, -46.6523]
+	};
+
+	const responseCreateRide = await axios.post("http://localhost:3000/request_ride", input);
+	const outputCreateRide = responseCreateRide.data;
+	expect(outputCreateRide.rideId).toBeDefined();
+
+	const getRide = await axios.get(`http://localhost:3000/rides/${outputCreateRide.rideId}`);
+	const output = getRide.data;
+	expect(output.status).toBe("waiting_driver");
+});
+
+test("Deve obter uma ride", async function () {
+	const input = {
+		"passenger_id": "f1ca63bb-1301-4966-bb94-ddd43fca7e72",
+		"from": [-23.5850, -46.6060],
+		"to": [-23.5346, -46.6523]
+	};
+
+	const responseCreateRide = await axios.post("http://localhost:3000/request_ride", input);
+	const outputCreateRide = responseCreateRide.data;
+	expect(outputCreateRide.rideId).toBeDefined();
+
+	const getRide = await axios.get(`http://localhost:3000/rides/${outputCreateRide.rideId}`);
+	const output = getRide.data;
+	expect(output.passenger).toBeDefined();
+	expect(output.driver.name).toBeNull();
+	expect(output.driver.document).toBeNull();
+	expect(output.driver.carPlate).toBeNull();
+	expect(output.status).toBe("waiting_driver");
+});
+
+test("Deve aceitar uma ride", async function () {
+	const input = {
+		"passenger_id": "f1ca63bb-1301-4966-bb94-ddd43fca7e72",
+		"from": [-23.5850, -46.6060],
+		"to": [-23.5346, -46.6523]
+	};
+
+	const responseCreateRide = await axios.post("http://localhost:3000/request_ride", input);
+	const outputCreateRide = responseCreateRide.data;
+	expect(outputCreateRide.rideId).toBeDefined();
+
+	const acceptInput = {
+		"ride_id": outputCreateRide.rideId,
+		"driver_id": "25ec5264-3b2b-4079-bacf-e81afda8c790"
+	};
+
+	const acceptRide = await axios.post("http://localhost:3000/accept_ride", acceptInput);
+
+	const getRide = await axios.get(`http://localhost:3000/rides/${outputCreateRide.rideId}`);
+	const output = getRide.data;
+	expect(output.passenger).toBeDefined();
+	expect(output.driver).toBeDefined();
+	expect(output.status).toBe("accepted");
+});

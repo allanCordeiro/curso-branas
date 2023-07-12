@@ -22,8 +22,10 @@ create table lift.driver(
 drop table if exists lift.segment;
 create table lift.segment(
     id uuid primary key,
-    ride_from float,
-    ride_to float,
+    lat_from float,
+    long_from float,
+    lat_to float,
+    long_to float,    
     ride_time time 
 );
 
