@@ -1,5 +1,5 @@
-import CreateDriver from "../../src/application/usecases/Driver/CreateDriver";
-import GetDriver from "../../src/application/usecases/Driver/GetDriver";
+import CreateDriver from "../../src/application/usecases/driver/CreateDriver";
+import GetDriver from "../../src/application/usecases/driver/GetDriver";
 
 test("Deve cadastrar o motorista", async function () {
 	const input = {
