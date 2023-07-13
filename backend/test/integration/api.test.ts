@@ -11,7 +11,7 @@ test("Deve fazer o cálculo do preço de uma corrida durante o dia", async funct
 		]
 	};
 	const response = await axios.post("http://localhost:3000/calculate_ride", input);
-	const output = response.data;
+	const output = response.data;	
 	expect(output.price).toBe(15.39);
 });
 
