@@ -1,4 +1,4 @@
-import Segment from "./segment";
+import Segment from "./Segment";
 
 export default class Ride {
 	segments: Segment[];
@@ -36,5 +36,5 @@ export default class Ride {
 		price = Math.round(price * factor) / factor;
 		
 		return (price < this.MIN_PRICE) ? this.MIN_PRICE : price;
-	}
+	}	
 }

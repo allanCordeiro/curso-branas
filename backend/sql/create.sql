@@ -29,6 +29,11 @@ create table lift.segment(
     ride_time time 
 );
 
+-- pendencias
+-- segments: tirar o from
+-- criar um relacionamento por trecho
+-- fazer o calculo do trecho
+
 
 drop table if exists lift.ride;
 create table lift.ride(

@@ -12,7 +12,7 @@ export default class Segment {
 		const factor = 10 ** 2;
 		return Math.round(this._distance * factor) / factor;
 	}
-
+	
 	isOvernight () {
 		return this.date.getHours() >= 22 || this.date.getHours() <= 6;
 	}

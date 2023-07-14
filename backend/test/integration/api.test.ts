@@ -11,7 +11,7 @@ test("Deve fazer o cálculo do preço de uma corrida durante o dia", async funct
 		]
 	};
 	const response = await axios.post("http://localhost:3000/calculate_ride", input);
-	const output = response.data;
+	const output = response.data;	
 	expect(output.price).toBe(15.39);
 });
 
@@ -48,7 +48,7 @@ test("Não deve cadastrar o passageiro quando cpf for invalido", async function 
 	const response = await axios.post("http://localhost:3000/passengers", input);
 	expect(response.status).toBe(422);
 	const output = response.data;
-	expect(output).toBe("invalid cpf");	
+	expect(output).toBe("Invalid cpf");	
 });
 
 test("Deve obter o passageiro", async function () {
@@ -91,7 +91,7 @@ test("Não deve cadastrar o motorista quando cpf for invalido", async function (
 	const response = await axios.post("http://localhost:3000/drivers", input);
 	expect(response.status).toBe(422);
 	const output = response.data;
-	expect(output).toBe("invalid cpf");	
+	expect(output).toBe("Invalid cpf");	
 });
 
 test("Deve obter o motorista", async function () {
@@ -113,8 +113,15 @@ test("Deve obter o motorista", async function () {
 });
 
 test("Deve criar uma ride", async function () {
+	const inputPassenger = {
+		name: "Jane Doe",
+		email: "jane.doe@gmail.com",
+		document: "86141982050",		
+	};
+	const responseCreatePassenger = await axios.post("http://localhost:3000/passengers", inputPassenger);
+	const outputCreatePassenger = responseCreatePassenger.data;
 	const input = {
-		"passenger_id": "f1ca63bb-1301-4966-bb94-ddd43fca7e72",
+		"passenger_id": outputCreatePassenger.passengerId,
 		"from": [-23.5850, -46.6060],
 		"to": [-23.5346, -46.6523]
 	};
@@ -129,8 +136,16 @@ test("Deve criar uma ride", async function () {
 });
 
 test("Deve obter uma ride", async function () {
+	const inputPassenger = {
+		name: "Jane Doe",
+		email: "jane.doe@gmail.com",
+		document: "86141982050",		
+	};
+	const responseCreatePassenger = await axios.post("http://localhost:3000/passengers", inputPassenger);
+	const outputCreatePassenger = responseCreatePassenger.data;
+
 	const input = {
-		"passenger_id": "f1ca63bb-1301-4966-bb94-ddd43fca7e72",
+		"passenger_id": outputCreatePassenger.passengerId,
 		"from": [-23.5850, -46.6060],
 		"to": [-23.5346, -46.6523]
 	};
@@ -149,8 +164,16 @@ test("Deve obter uma ride", async function () {
 });
 
 test("Deve aceitar uma ride", async function () {
+	const inputPassenger = {
+		name: "Jane Doe",
+		email: "jane.doe@gmail.com",
+		document: "86141982050",		
+	};
+	const responseCreatePassenger = await axios.post("http://localhost:3000/passengers", inputPassenger);
+	const outputCreatePassenger = responseCreatePassenger.data;
+
 	const input = {
-		"passenger_id": "f1ca63bb-1301-4966-bb94-ddd43fca7e72",
+		"passenger_id": outputCreatePassenger.passengerId,
 		"from": [-23.5850, -46.6060],
 		"to": [-23.5346, -46.6523]
 	};
@@ -159,9 +182,19 @@ test("Deve aceitar uma ride", async function () {
 	const outputCreateRide = responseCreateRide.data;
 	expect(outputCreateRide.rideId).toBeDefined();
 
+	const inputDriver = {
+		name: "Jane Doe",
+		email: "jane.doe@gmail.com",
+		document: "86141982050",
+		carPlate: "AAA9999",
+
+	};
+	const responseCreateDriver = await axios.post("http://localhost:3000/drivers", inputPassenger);
+	const outputCreateDriver = responseCreateDriver.data;
+
 	const acceptInput = {
 		"ride_id": outputCreateRide.rideId,
-		"driver_id": "25ec5264-3b2b-4079-bacf-e81afda8c790"
+		"driver_id": outputCreateDriver.driverId
 	};
 
 	const acceptRide = await axios.post("http://localhost:3000/accept_ride", acceptInput);

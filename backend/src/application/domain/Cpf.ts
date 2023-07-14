@@ -2,7 +2,7 @@ export default class Cpf {
     value: string;
     constructor(value: string) {
         this.value = value;
-        if(!this.validate()) throw new Error("invalid cpf");
+        if(!this.validate()) throw new Error("Invalid cpf");
         
     }
 
