@@ -35,7 +35,7 @@ app.post("/passengers", async function (req, res) {
 
 app.get("/passengers/:passengerId", async function (req, res) {
 	try {		
-		const useCase = new GetPassenger();
+		const useCase = new GetPassenger(new PassengerRepositoryDatabase());
 		const output = await useCase.execute({ passengerId: req.params.passengerId });
 		res.json(output);
 	} catch(e: any) {

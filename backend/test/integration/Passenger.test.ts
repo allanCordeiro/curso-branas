@@ -35,8 +35,8 @@ test("Deve obter o passageiro", async function() {
 
 	expect(outputCreate.passengerId).toBeDefined();
 
-    const usecase = new GetPassenger();
-    const output = await usecase.execute({passengerId: outputCreate.passengerId });
+    const usecase = new GetPassenger(new PassengerRepositoryDatabase());
+    const output = await usecase.execute({passengerId: outputCreate.passengerId });	
     expect(output.document).toBe(input.document)
     expect(output.name).toBe(input.name);
     expect(output.email).toBe(input.email);

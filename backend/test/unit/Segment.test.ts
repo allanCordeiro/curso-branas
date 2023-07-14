@@ -1,4 +1,4 @@
-import Segment from "../../src/ride/segment";
+import Segment from "../../src/application/domain/Segment";
 
 test("deve retornar a distancia correta entre SP e NY", function() {
     const latA = -23.550520;

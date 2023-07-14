@@ -1,5 +1,5 @@
 import pgp from "pg-promise";
-import Cpf from "../../../cpf.validator";
+import Cpf from "../../domain/Cpf";
 
 export default class CreateDriver {
     constructor() {}

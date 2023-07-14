@@ -1,5 +1,5 @@
 
-import Ride from "../../src/ride/ride";
+import Ride from "../../src/application/domain/Ride";
 
 
 test("Deve fazer o cálculo do preço de uma corrida durante o dia", function () {

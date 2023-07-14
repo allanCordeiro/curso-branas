@@ -1,4 +1,4 @@
-import Cpf from "../src/cpf.validator";
+import Cpf from "../../src/application/domain/Cpf";
 
 
 test.each([
