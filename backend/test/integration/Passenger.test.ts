@@ -21,7 +21,7 @@ test("Não deve cadastrar o passageiro quando cpf for invalido", async function 
 		document: "86141982052"
 	};
 	const usecase = new CreatePassenger(new PassengerRepositoryDatabase());
-	expect(async () => await usecase.execute(input)).rejects.toThrow(new Error("invalid cpf"));	
+	expect(async () => await usecase.execute(input)).rejects.toThrow(new Error("Invalid cpf"));	
 });
 
 test("Deve obter o passageiro", async function() {

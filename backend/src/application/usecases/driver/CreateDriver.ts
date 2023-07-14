@@ -2,17 +2,16 @@ import pgp from "pg-promise";
 import Cpf from "../../domain/Cpf";
 import DriverRepositoryDatabase from "../../../infra/repository/DriverRepositoryDatabase";
 import DriverRepository from "../../repository/DriverRepository";
+import Passenger from "../../domain/Passenger";
+import Driver from "../../domain/Driver";
 
 export default class CreateDriver {
     constructor(readonly driverRepository: DriverRepository) {}
 
     async execute(input:Input): Promise<Output> {
-        const driverId = crypto.randomUUID();        
-		if(!new Cpf(input.document)) {
-            throw new Error("invalid cpf");
-        }				
-        await this.driverRepository.save({driverId: driverId, name: input.name, email: input.email, document: input.document, carPlate: input.carPlate});
-        return { driverId };
+        const driver = Driver.create(input.name, input.email, input.document, input.carPlate);
+        await this.driverRepository.save(driver);
+        return { driverId: driver.driverId };
     }
 }
 

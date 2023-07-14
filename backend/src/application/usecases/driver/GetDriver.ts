@@ -9,9 +9,9 @@ export default class GetDriver {
         const driver = await this.driverRepository.get(input.driverId);        
         return {
             name: driver.name,
-            email: driver.email,
-            document: driver.document,
-            carPlate: driver.carPlate
+            email: driver.email.value,
+            document: driver.document.value,
+            carPlate: driver.carPlate.value
         }
     }
 }

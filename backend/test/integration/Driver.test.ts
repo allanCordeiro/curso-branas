@@ -22,7 +22,7 @@ test("Não deve cadastrar o motorista quando cpf for invalido", async function (
 		carPlate: "AAA9999"
 	};
 	const usecase = new CreateDriver(new DriverRepositoryDatabase());
-    expect(async () => await usecase.execute(input)).rejects.toThrow(new Error("invalid cpf"));	
+    expect(async () => await usecase.execute(input)).rejects.toThrow(new Error("Invalid cpf"));	
 });
 
 test("Deve obter o motorista", async function () {

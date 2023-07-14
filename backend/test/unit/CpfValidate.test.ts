@@ -18,7 +18,7 @@ test.each([
     "99999999999",
     "",    
 ])("Deve testar os cpfs nao validos", function(value: string){    
-    expect(() => new Cpf(value)).toThrow(new Error("invalid cpf"));    
+    expect(() => new Cpf(value)).toThrow(new Error("Invalid cpf"));    
 });
 
 

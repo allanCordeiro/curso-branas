@@ -9,7 +9,7 @@ test("Deve criar uma instancia de passageiro", function() {
 })
 
 test("Deve gerar erro caso cpf seja inválido", function() {
-    expect(() => Passenger.create("John Doe", "john.doe@gmail.com", "17422998065")).toThrow(new Error("invalid cpf"));    
+    expect(() => Passenger.create("John Doe", "john.doe@gmail.com", "17422998065")).toThrow(new Error("Invalid cpf"));    
 })
 
 test("Deve gerar erro caso email seja inválido", function() {

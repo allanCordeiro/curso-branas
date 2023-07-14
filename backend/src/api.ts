@@ -14,16 +14,6 @@ import DriverRepositoryDatabase from "./infra/repository/DriverRepositoryDatabas
 const app = express();
 app.use(express.json());
 
-app.post("/calculate_ride", async function (req, res) {
-	try {
-		const usecase = new CalculateRide();
-		const output = await usecase.execute({ segments: req.body.segments})
-		res.json(output);
-	} catch (e: any) {
-		res.status(422).send(e.message);
-	}
-});
-
 app.post("/passengers", async function (req, res) {
 	try {				
 		const useCase = new CreatePassenger(new PassengerRepositoryDatabase());
@@ -63,6 +53,16 @@ app.get("/drivers/:driverId", async function (req, res) {
 		res.status(HttpStatusCode.InternalServerError).send(e.message);
 	}
 })
+
+app.post("/calculate_ride", async function (req, res) {
+	try {
+		const usecase = new CalculateRide();
+		const output = await usecase.execute({ segments: req.body.segments})
+		res.json(output);
+	} catch (e: any) {
+		res.status(422).send(e.message);
+	}
+});
 
 app.post("/request_ride", async function (req, res) {
 	try {

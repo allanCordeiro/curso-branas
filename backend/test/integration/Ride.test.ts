@@ -1,7 +1,9 @@
+import CreatePassenger from "../../src/application/usecases/passenger/CreatePassenger";
 import AcceptRide from "../../src/application/usecases/ride/AcceptRide";
 import CalculateRide from "../../src/application/usecases/ride/CalculateRide";
 import GetRide from "../../src/application/usecases/ride/GetRide";
 import RequestRide from "../../src/application/usecases/ride/RequestRide";
+import PassengerRepositoryDatabase from "../../src/infra/repository/PassengerRepositoryDatabase";
 
 test("Deve fazer o cálculo do preço de uma corrida durante o dia", async function () {
 	const input = {
@@ -43,8 +45,16 @@ test("Se a distância for inválida deve lançar um erro", async function () {
 });
 
 test("Deve criar uma nova ride", async function () {
+    const passenger = {
+		name: "John Doe",
+		email: "john.doe@gmail.com",
+		document: "86141982050"
+	};
+	const usecasePassenger = new CreatePassenger(new PassengerRepositoryDatabase());
+    const outputPassenger = await usecasePassenger.execute(passenger);
+
     const input = {
-        "passengerId": "9e96d2b4-6a85-4667-b33c-823c1cfb82c5",
+        "passengerId": outputPassenger.passengerId,
         "from": [-23.5850, -46.6060],
         "to": [-23.5346, -46.6523]
     }
@@ -55,8 +65,15 @@ test("Deve criar uma nova ride", async function () {
 });
 
 test("Deve obter uma ride", async function () {
+    const passenger = {
+		name: "John Doe",
+		email: "john.doe@gmail.com",
+		document: "86141982050"
+	};
+	const usecasePassenger = new CreatePassenger(new PassengerRepositoryDatabase());
+    const outputPassenger = await usecasePassenger.execute(passenger);
     const input = {
-        "passengerId": "9e96d2b4-6a85-4667-b33c-823c1cfb82c5",
+        "passengerId": outputPassenger.passengerId,
         "from": [-23.5850, -46.6060],
         "to": [-23.5346, -46.6523]
     }
@@ -77,8 +94,16 @@ test("Deve obter uma ride", async function () {
 });
 
 test("Deve aceitar uma ride", async function () {
+    const passenger = {
+		name: "John Doe",
+		email: "john.doe@gmail.com",
+		document: "86141982050"
+	};
+	const usecasePassenger = new CreatePassenger(new PassengerRepositoryDatabase());
+    const outputPassenger = await usecasePassenger.execute(passenger);
+
     const input = {
-        "passengerId": "9e96d2b4-6a85-4667-b33c-823c1cfb82c5",
+        "passengerId": outputPassenger.passengerId,
         "from": [-23.5850, -46.6060],
         "to": [-23.5346, -46.6523]
     }
