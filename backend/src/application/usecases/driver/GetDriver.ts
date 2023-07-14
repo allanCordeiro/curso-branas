@@ -1,19 +1,18 @@
 import pgp from "pg-promise";
+import DriverRepository from "../../repository/DriverRepository";
 
 export default class GetDriver {
 
-    constructor() {}
+    constructor(readonly driverRepository: DriverRepository) {}
 
     async execute(input: Input): Promise<Output> {
-        const connection = pgp()("postgres://user:password@localhost:5432/ride-app");
-		const [driverData] = await connection.query("select name, email, document, car_plate from lift.driver where id = $1",[input.driverId]);
-		await connection.$pool.end();
-		return {			
-			name: driverData.name,
-			email: driverData.email,
-			document: driverData.document,
-			carPlate: driverData.car_plate
-		};
+        const driver = await this.driverRepository.get(input.driverId);        
+        return {
+            name: driver.name,
+            email: driver.email,
+            document: driver.document,
+            carPlate: driver.carPlate
+        }
     }
 }
 

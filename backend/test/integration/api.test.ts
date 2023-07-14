@@ -114,7 +114,7 @@ test("Deve obter o motorista", async function () {
 
 test("Deve criar uma ride", async function () {
 	const input = {
-		"passenger_id": "f1ca63bb-1301-4966-bb94-ddd43fca7e72",
+		"passenger_id": "9e96d2b4-6a85-4667-b33c-823c1cfb82c5",
 		"from": [-23.5850, -46.6060],
 		"to": [-23.5346, -46.6523]
 	};
@@ -130,7 +130,7 @@ test("Deve criar uma ride", async function () {
 
 test("Deve obter uma ride", async function () {
 	const input = {
-		"passenger_id": "f1ca63bb-1301-4966-bb94-ddd43fca7e72",
+		"passenger_id": "9e96d2b4-6a85-4667-b33c-823c1cfb82c5",
 		"from": [-23.5850, -46.6060],
 		"to": [-23.5346, -46.6523]
 	};
@@ -150,7 +150,7 @@ test("Deve obter uma ride", async function () {
 
 test("Deve aceitar uma ride", async function () {
 	const input = {
-		"passenger_id": "f1ca63bb-1301-4966-bb94-ddd43fca7e72",
+		"passenger_id": "9e96d2b4-6a85-4667-b33c-823c1cfb82c5",
 		"from": [-23.5850, -46.6060],
 		"to": [-23.5346, -46.6523]
 	};
@@ -161,7 +161,7 @@ test("Deve aceitar uma ride", async function () {
 
 	const acceptInput = {
 		"ride_id": outputCreateRide.rideId,
-		"driver_id": "25ec5264-3b2b-4079-bacf-e81afda8c790"
+		"driver_id": "8320d38c-e066-43b8-9ecb-29122f04e0c8"
 	};
 
 	const acceptRide = await axios.post("http://localhost:3000/accept_ride", acceptInput);

@@ -9,6 +9,7 @@ import RequestRide from "./application/usecases/ride/RequestRide";
 import GetRide from "./application/usecases/ride/GetRide";
 import AcceptRide from "./application/usecases/ride/AcceptRide";
 import PassengerRepositoryDatabase from "./infra/repository/PassengerRepositoryDatabase";
+import DriverRepositoryDatabase from "./infra/repository/DriverRepositoryDatabase";
 
 const app = express();
 app.use(express.json());
@@ -45,7 +46,7 @@ app.get("/passengers/:passengerId", async function (req, res) {
 
 app.post("/drivers", async function (req, res) {
 	try {		
-		const useCase = new CreateDriver();
+		const useCase = new CreateDriver(new DriverRepositoryDatabase());
 		const output = await useCase.execute({ name: req.body.name, email: req.body.email, document: req.body.document, carPlate: req.body.carPlate});
 		res.json(output);
 	} catch(e: any) {
@@ -55,7 +56,7 @@ app.post("/drivers", async function (req, res) {
 
 app.get("/drivers/:driverId", async function (req, res) {
 	try {		
-		const useCase = new GetDriver();
+		const useCase = new GetDriver(new DriverRepositoryDatabase());
 		const output = await useCase.execute({driverId: req.params.driverId})
 		res.json(output);
 	} catch(e: any) {

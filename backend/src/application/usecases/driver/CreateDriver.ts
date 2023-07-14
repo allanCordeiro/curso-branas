@@ -1,23 +1,17 @@
 import pgp from "pg-promise";
 import Cpf from "../../domain/Cpf";
+import DriverRepositoryDatabase from "../../../infra/repository/DriverRepositoryDatabase";
+import DriverRepository from "../../repository/DriverRepository";
 
 export default class CreateDriver {
-    constructor() {}
+    constructor(readonly driverRepository: DriverRepository) {}
 
     async execute(input:Input): Promise<Output> {
         const driverId = crypto.randomUUID();        
 		if(!new Cpf(input.document)) {
             throw new Error("invalid cpf");
-        }
-		
-		const connection = pgp()("postgres://user:password@localhost:5432/ride-app");
-		await connection.query("insert into lift.driver(id, name, email, document, car_plate) values($1, $2, $3, $4, $5)",[driverId,
-			input.name,
-			input.email,
-			input.document,
-            input.carPlate
-		]);
-		await connection.$pool.end();		
+        }				
+        await this.driverRepository.save({driverId: driverId, name: input.name, email: input.email, document: input.document, carPlate: input.carPlate});
         return { driverId };
     }
 }
