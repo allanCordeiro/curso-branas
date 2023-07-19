@@ -1,4 +1,4 @@
-import Ride from "../../domain/Ride";
+import Ride from "../../../domain/Ride";
 
 export default class CalculateRide {
     constructor() {}
@@ -6,10 +6,11 @@ export default class CalculateRide {
     async execute(input: Input): Promise<Output> {    
         try {
             const ride = new Ride();
-            for (const segment of input.segments) {
-                ride.addSegment(segment.from[0], segment.from[1], segment.to[0], segment.to[1], new Date(segment.date));
+            for (const position of input.positions) {
+                ride.addPosition(position.latitude, position.longitude, new Date(position.date));
             }
-            const price = ride.calculate();		
+            const price = ride.calculate();	
+            console.log(price);	
             return { price };
         } catch(e: any) {
             throw e;            
@@ -18,7 +19,7 @@ export default class CalculateRide {
 }
 
 type Input = {
-    segments: {from: Array<number>, to: Array<number>, date: string}[]
+    positions: {latitude: number, longitude: number, date: string}[]
 }
 
 type Output = {

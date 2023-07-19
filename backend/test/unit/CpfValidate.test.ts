@@ -1,4 +1,4 @@
-import Cpf from "../../src/application/domain/Cpf";
+import Cpf from "../../src/domain/Cpf";
 
 
 test.each([

@@ -1,9 +1,9 @@
 import pgp from "pg-promise";
-import Cpf from "../../domain/Cpf";
+import Cpf from "../../../domain/Cpf";
 import DriverRepositoryDatabase from "../../../infra/repository/DriverRepositoryDatabase";
 import DriverRepository from "../../repository/DriverRepository";
-import Passenger from "../../domain/Passenger";
-import Driver from "../../domain/Driver";
+import Passenger from "../../../domain/Passenger";
+import Driver from "../../../domain/Driver";
 
 export default class CreateDriver {
     constructor(readonly driverRepository: DriverRepository) {}

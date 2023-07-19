@@ -1,4 +1,4 @@
-import Email from "../../src/application/domain/Email";
+import Email from "../../src/domain/Email";
 
 test("Deve aceitar um email válido", function() {    
     const email = new Email("john.doe@gmail.com");

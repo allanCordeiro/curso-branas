@@ -1,7 +1,7 @@
 import pgp from "pg-promise";
 
 import PassengerRepository from "../../application/repository/PassengerRepository";
-import Passenger from "../../application/domain/Passenger";
+import Passenger from "../../domain/Passenger";
 
 export default class PassengerRepositoryDatabase implements PassengerRepository {
     async save(passenger: Passenger): Promise<void> {

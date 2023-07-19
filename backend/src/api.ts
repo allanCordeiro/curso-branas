@@ -55,9 +55,9 @@ app.get("/drivers/:driverId", async function (req, res) {
 })
 
 app.post("/calculate_ride", async function (req, res) {
-	try {
+	try {		
 		const usecase = new CalculateRide();
-		const output = await usecase.execute({ segments: req.body.segments})
+		const output = await usecase.execute({ positions: req.body.positions})		
 		res.json(output);
 	} catch (e: any) {
 		res.status(422).send(e.message);

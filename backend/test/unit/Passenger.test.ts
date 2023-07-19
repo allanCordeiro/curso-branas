@@ -1,4 +1,4 @@
-import Passenger from "../../src/application/domain/Passenger"
+import Passenger from "../../src/domain/Passenger"
 
 test("Deve criar uma instancia de passageiro", function() {
     const passenger = Passenger.create("John Doe", "john.doe@gmail.com", "17422998067");

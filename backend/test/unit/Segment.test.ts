@@ -1,13 +1,17 @@
-import Segment from "../../src/application/domain/Segment";
+import Segment from "../../src/domain/Segment";
 
-test("deve retornar a distancia correta entre SP e NY", function() {
-    const latA = -23.550520;
-    const longA = -46.633308;
-    const latB = 40.712776;
-    const longB = -74.005974;
-    const expectedDistance = 7685.62;
+test("deve validar caso a distancia do segmento seja maior que zero", function() {
+    const segment = new Segment(10, new Date("2023-05-01 10:00"));
+    expect(segment.isValidDistance()).toBeTruthy();
+});
 
-    const segment = new Segment(latA, longA, latB, longB, new Date());
-    const output = segment.distance;
-    expect(output).toBe(expectedDistance);
-})
+test("deve validar caso a data esteja no formato esperado", function() {
+    const segment = new Segment(10, new Date("2023-05-01 10:00"));
+    expect(segment.isValidDate()).toBeTruthy();
+});
+
+test("deve devolver false caso a distancia do segmento seja menor do que zero", function() {
+    expect(() => new Segment(-5, new Date("2023-05-01 10:00"))).toThrow(new Error("Invalid distance"));
+    
+});
+

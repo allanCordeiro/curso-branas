@@ -1,7 +1,7 @@
 import pgp from "pg-promise";
 
 import DriverRepository from "../../application/repository/DriverRepository";
-import Driver from "../../application/domain/Driver";
+import Driver from "../../domain/Driver";
 
 export default class DriverRepositoryDatabase implements DriverRepository {
     async save(driver: Driver): Promise<void> {

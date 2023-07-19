@@ -1,4 +1,4 @@
-import CarPlate from "../../src/application/domain/CarPlate"
+import CarPlate from "../../src/domain/CarPlate"
 
 test("Deve validar uma placa de carro", function() {
     const carPlate = new CarPlate("AAA1234");

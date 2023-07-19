@@ -1,7 +1,7 @@
 import pgp from "pg-promise";
-import Cpf from "../../domain/Cpf";
+import Cpf from "../../../domain/Cpf";
 import PassengerRepository from "../../repository/PassengerRepository";
-import Passenger from "../../domain/Passenger";
+import Passenger from "../../../domain/Passenger";
 
 export default class CreatePassenger {
     constructor(readonly passengerRepository: PassengerRepository) {}
